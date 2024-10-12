@@ -35,7 +35,7 @@
         <mybatis-plus.version>3.4.2</mybatis-plus.version>
         <caffeine.version>2.8.8</caffeine.version>
 
-        <springboot.version>2.3.7.RELEASE</springboot.version>
+        <springboot.version>3.0.6</springboot.version>
         <spring.version>5.3.19</spring.version>
         <tomcat.version>9.0.41</tomcat.version>
         <jackson-bom.version>2.13.5</jackson-bom.version>

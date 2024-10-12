@@ -17,7 +17,7 @@
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <log4j2.version>2.16.0</log4j2.version>
 
-        <springboot.version>2.3.7.RELEASE</springboot.version>
+        <springboot.version>3.0.6</springboot.version>
         <spring.version>5.3.19</spring.version>
 
         <maven.test.skip>false</maven.test.skip>
