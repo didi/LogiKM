@@ -391,6 +391,7 @@ const AutoPage = (props: any) => {
                   type="icon-fangdajing"
                   onClick={(_) => {
                     setSearchKeywords(searchKeywordsInput);
+                    setPageIndex(1);
                   }}
                   style={{ fontSize: '16px' }}
                 />
@@ -399,6 +400,7 @@ const AutoPage = (props: any) => {
               value={searchKeywordsInput}
               onPressEnter={(_) => {
                 setSearchKeywords(searchKeywordsInput);
+                setPageIndex(1);
               }}
               onChange={(e) => {
                 setSearchKeywordsInput(e.target.value);
