@@ -174,7 +174,7 @@ public class GroupManagerImpl implements GroupManager {
         }
 
         // 分页 后 返回
-        return PaginationUtil.pageBySubData(voList, dto);
+        return PaginationUtil.pageBySubData( PaginationUtil.pageBySort(voList, dto.getSortField(), dto.getSortType(),"memberCount", dto.getSortType()), dto);
     }
 
     @Override
