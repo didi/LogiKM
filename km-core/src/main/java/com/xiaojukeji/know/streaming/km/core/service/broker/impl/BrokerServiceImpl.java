@@ -176,6 +176,20 @@ public class BrokerServiceImpl extends BaseKafkaVersionControlService implements
         return this.listAllBrokersAndUpdateCache(clusterPhyId).stream().filter( elem -> !elem.alive()).collect(Collectors.toList());
     }
 
+    /**
+     * 清理对应集群中下线的broker记录
+     * @param clusterPhyId
+     */
+    @Override
+    public void clearInactiveClusterPhyBrokers(Long clusterPhyId) {
+        try {
+            this.getAllBrokerPOsFromDB(clusterPhyId).stream()
+                .filter(elem -> elem.getStatus().equals(Constant.DOWN))
+                .forEach(elem -> brokerDAO.deleteById(elem.getId()));
+        } catch (Exception e) {
+            log.error("method=clearInactiveClusterPhyBrokers||clusterPhyId={}||errMsg=exception!", clusterPhyId, e);
+        }
+    }
     @Override
     public List<Broker> listAllBrokersFromDB(Long clusterPhyId) {
         return this.listAllBrokersAndUpdateCache(clusterPhyId);

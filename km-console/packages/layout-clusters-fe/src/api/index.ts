@@ -120,6 +120,8 @@ const api = {
   getTopicMetricPoints: (clusterPhyId: number, topicName: string) => getApi(`/clusters/${clusterPhyId}/topics/${topicName}/metric-points`),
   // Broker列表接口
   getBrokersList: (clusterPhyId: number) => getApi(`/clusters/${clusterPhyId}/brokers-overview`),
+  // 删除失效Broker
+  clearInactiveBrokers: (clusterPhyId: number) => getApi(`/clusters/${clusterPhyId}/brokers-clear`),
   // Broker列表页健康检查指标
   getBrokerMetricPoints: (clusterPhyId: number) => getApi(`/physical-clusters/${clusterPhyId}/latest-metrics`),
   // Controller列表接口 /api/v3/clusters/{clusterPhyId}/controller-history「controller-change-log」

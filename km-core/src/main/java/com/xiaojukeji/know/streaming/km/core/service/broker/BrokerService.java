@@ -71,4 +71,6 @@ public interface BrokerService {
     boolean allServerDown(Long clusterPhyId);
 
     boolean existServerDown(Long clusterPhyId);
+
+    void clearInactiveClusterPhyBrokers(Long clusterPhyId);
 }

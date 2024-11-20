@@ -66,6 +66,42 @@ const BrokerList: React.FC = (props: any) => {
       });
   };
 
+  // 请求接口获取数据
+  const clearInactiveBrokers = async ({ pageNo, pageSize, filters, sorter }: any) => {
+    if (urlParams?.clusterId === undefined) return;
+    // filters = filters || filteredInfo;
+    setLoading(true);
+    const params = {
+      searchKeywords: searchKeywords.slice(0, 128),
+      pageNo,
+      pageSize,
+      latestMetricNames: ['PartitionsSkew', 'Leaders', 'LeadersSkew', 'LogSize'],
+      sortField: sorter?.field || 'brokerId',
+      sortType: sorter?.order ? sorter.order.substring(0, sorter.order.indexOf('end')) : 'asc',
+    };
+
+    request(API.clearInactiveBrokers(urlParams?.clusterId), { method: 'POST', data: params })
+      .then((res: any) => {
+        setPagination({
+          current: res.pagination?.pageNo,
+          pageSize: res.pagination?.pageSize,
+          total: res.pagination?.total,
+        });
+        const newData =
+          res?.bizData.map((item: any) => {
+            return {
+              ...item,
+              ...item?.latestMetrics?.metrics,
+            };
+          }) || [];
+        setData(newData);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setLoading(false);
+      });
+  };
+
   const onTableChange = (pagination: any, filters: any, sorter: any) => {
     // setFilteredInfo(filters);
     genData({ pageNo: pagination.current, pageSize: pagination.pageSize, filters, sorter });
@@ -106,6 +142,12 @@ const BrokerList: React.FC = (props: any) => {
               onClick={() => genData({ pageNo: pagination.current, pageSize: pagination.pageSize })}
             >
               <IconFont className={`${tableHeaderPrefix}-left-refresh-icon`} type="icon-shuaxin1" />
+            </div>
+            <div
+              className={`${tableHeaderPrefix}-left-clear`}
+              onClick={() => clearInactiveBrokers({ pageNo: pagination.current, pageSize: pagination.pageSize })}
+            >
+              <IconFont className={`${tableHeaderPrefix}-left-clear-icon`} type="icon-Operation" />
             </div>
           </div>
           <div className={`${tableHeaderPrefix}-right`}>

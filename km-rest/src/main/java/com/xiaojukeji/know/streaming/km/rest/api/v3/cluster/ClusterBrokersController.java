@@ -62,4 +62,12 @@ public class ClusterBrokersController {
                                                                                    @RequestBody ClusterBrokersOverviewDTO dto) {
         return clusterBrokersManager.getClusterPhyBrokersOverview(clusterPhyId, dto);
     }
+
+    @ApiOperation(value = "集群无效brokers清理")
+    @PostMapping(value = "clusters/{clusterPhyId}/brokers-clear")
+    @ResponseBody
+    public PaginationResult<ClusterBrokersOverviewVO> clearInactiveClusterPhyBrokers(@PathVariable Long clusterPhyId,
+                                                                                   @RequestBody ClusterBrokersOverviewDTO dto) {
+        return clusterBrokersManager.clearInactiveClusterPhyBrokers(clusterPhyId, dto);
+    }
 }
